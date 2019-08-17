@@ -23,6 +23,9 @@ Using the OMEN token, users can boost their post to the top of the postings for 
 ## See it live!
 - [Iris Web App](https://iris-f137c.web.app/)
 
+## Deployed at
+- [Ropsten Network](https://ropsten.etherscan.io/address/0xbe5fc6fc224900a2aa7217f6f81989d1a5ff2148)
+
 ## Running the project locally
 Clone or fork the project, then:
 
