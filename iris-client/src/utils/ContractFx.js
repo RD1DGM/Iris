@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import abi from '../contract_abi/abi';
+import abi from '../Contract_ABI/abi'
 require('dotenv').config();
 
 const provider = new ethers.providers.Web3Provider(window.web3.currentProvider);
@@ -74,3 +74,5 @@ export const checkerObj = {
     // setCoins(check.toString())
   }
 };
+
+export default ContractFx;

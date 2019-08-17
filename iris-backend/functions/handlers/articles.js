@@ -12,6 +12,8 @@ exports.getAllArticles = (req, res) => {
         console.log(doc.data());
         articles.push({
           articlesId: doc.id,
+          articleTitle: doc.data().articleTitle,
+          articleType: doc.data().articleType,
           body: doc.data().body,
           userAddress: doc.data().userAddress,
           createdAt: doc.data().createdAt,
@@ -44,13 +46,16 @@ exports.getArticles = (req, res) => {
 };
 
 const noPic = 'no-img.png';
+const firstPic = 'FirstCard.png'
 
 exports.postArticle = (req, res) => {
   if (req.body.body.trim() === '') {
     return res.status(400).json({ body: 'Body must not be empty' });
   }
   const newArticle = {
-    imageSrc: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${noPic}?alt=media`,
+    imageSrc: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${firstPic}?alt=media`,
+    articleTitle: req.body.articleTitle,
+    articleType: req.body.articleType,
     body: req.body.body,
     userAddress: req.body.userAddress,
     createdAt: new Date().toISOString()
