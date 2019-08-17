@@ -2,7 +2,7 @@
 A decentralize web application for publishing platform that incentivizes users to have beneficial interactions around the globe.
 
 ## See it live!
-- [Iris](https://iris-f137c.web.app/)
+- [Iris Web App](https://iris-f137c.web.app/)
 
 ## Running the project locally
 Clone or fork the project, then:
