@@ -1,4 +1,4 @@
-# Iris 
+# <img src="gt.png" alt="Crypto-Lottery" width="400px" >
 A decentralize web application platform for publishing, networking, and socializing that incentivizes users to have beneficial interactions around the globe.
 
 ## Abstract
