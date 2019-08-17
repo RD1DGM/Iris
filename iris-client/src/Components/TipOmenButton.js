@@ -5,20 +5,37 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-// import {tipObj} from '../utils/ContractFx'
+import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
+import { useWeb3 } from '../utils/Web3Helper';
+import { ethers } from 'ethers';
 
 export function TipOmen() {
+  const w3 = useWeb3();
+  const { status, enable } = w3;
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
-    setOpen(true);
+    if (status === 'LOCKED') {
+      enable();
+    }
+    if (status === 'READY') {
+      setOpen(true)
+    } 
   }
 
   function handleClose() {
     setOpen(false);
   }
 
-  // const {ethAddressHandler,tipEth,tipHandler,tipOmen} = tipObj
+  const tip = async () => {
+    const price = ethers.utils.bigNumberify;
+    let tip = await readAndWriteContract.tipOmen(contractAddress, price(1), { gasLimit: 3000000 });
+    console.log(tip);
+    setOpen(false)
+    return tip;
+  };
+
+  // console.log(readAndWriteContract)
 
   return (
     <div>
@@ -42,48 +59,7 @@ export function TipOmen() {
           <Button onClick={handleClose} color="primary">
             Disagree
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
-
-export function TipEth() {
-  const [open, setOpen] = React.useState(false);
-
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
-
-  return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Tip ETHER
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"WANNA TIP ETHER?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            YOU WONT REGRET IT!
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={() => tip()} color="primary" autoFocus>
             Agree
           </Button>
         </DialogActions>

@@ -10,7 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Loading from '../Components/Loading';
 import Grid from '@material-ui/core/Grid';
 import { ContextCreator } from '../Context/ContextCreator';
-import { TipEth, TipOmen } from '../Components/AlertDialog';
+import { TipEth } from '../Components/TipEthButton';
+import { TipOmen } from '../Components/TipOmenButton';
+
 
 const ArticlesList = () => {
   const articles = useContext(ContextCreator);
