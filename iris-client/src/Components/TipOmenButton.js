@@ -50,17 +50,14 @@ export function TipOmen() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {/* <input type="button" value="TIP ETH" onClick={() => tipEth()} /> <br />
-            Ethereum Address: <input type="text" value={ethAddress} onChange={e => ethAddressHandler(e)} />
-            Price in Ether: <input type="text" value={tip} onChange={e => tipHandler(e)} /> */}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            CANCEL
           </Button>
           <Button onClick={() => tip()} color="primary" autoFocus>
-            Agree
+            SUBMIT
           </Button>
         </DialogActions>
       </Dialog>

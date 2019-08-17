@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ArticleList from './Pages/ArticlesList';
 import ArticlePage from './Pages/ArticlePage';
 import ArticleForm from './Pages/ArticleForm';
-import Loading from './Components/Loading';
 import axios from 'axios';
 import { ContextCreator } from './Context/ContextCreator';
+import NotFound from './Pages/NotFound';
 
 function App() {
   const [address, setAddress] = useState();
@@ -28,13 +28,14 @@ function App() {
   return (
     <div>
       <Router>
-        <Switch>
-          <ContextCreator.Provider value={address}>
+        <ContextCreator.Provider value={address}>
+          <Switch>
             <Route path="/" component={ArticleList} exact />
             <Route path="/article/:id" component={ArticlePage} />
-          </ContextCreator.Provider>
-          <Route path="/articleform" component={ArticleForm} />
-        </Switch>
+            <Route path="/articleform" component={ArticleForm} />
+            <Route component={NotFound} />
+          </Switch>
+        </ContextCreator.Provider>
       </Router>
     </div>
   );
