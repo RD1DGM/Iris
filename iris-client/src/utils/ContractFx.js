@@ -34,45 +34,43 @@ export const tipObj = {
   }
 };
 
-export const buyOmenObj = {
-  buyOmen: async () => {
-    let buy = await readAndWriteContract.buyOmen(address, {
-      gasLimit: 3000000,
-      value: '0x' + window.web3.toWei(`${price}`)
-    });
-    console.log(buy);
-    // setPrice('');
-    return buy;
-  },
-  priceHanlder: e => {
-    // setPrice(e.target.value)
-  }
-};
+// export const buyOmenObj = {
+//   buyOmen: async () => {
+//     let buy = await readAndWriteContract.buyOmen(address, {
+//       gasLimit: 3000000,
+//       value: '0x' + window.web3.toWei(`${price}`)
+//     });
+//     console.log(buy);
+//     // setPrice('');
+//     return buy;
+//   },
+//   priceHanlder: e => {
+//     // setPrice(e.target.value)
+//   }
+// };
 
-export const checkerObj = {
-  checkBalance: async () => {
-    try {
-      let balance = await provider.getBalance(address);
-      let formated = ethers.utils.formatEther(x);
-      // setEthBalance(formated)
-      console.log('balance: ', y);
-    } catch (err) {
-      throw err;
-    }
-  },
-  checkOmen: async () => {
-    try {
-      let check = await readAndWriteContract.balanceOf(await signer.getAddress());
-      // console.log(check.toString())
-      // setOmenBalance(check.toString())
-    } catch (err) {
-      throw err;
-    }
-  },
-  checkCoins: async () => {
-    let check = await readAndWriteContract.balanceOf(contractAddress);
-    // setCoins(check.toString())
-  }
-};
-
-export default ContractFx;
+// export const checkerObj = {
+//   checkBalance: async () => {
+//     try {
+//       let balance = await provider.getBalance(address);
+//       let formated = ethers.utils.formatEther(x);
+//       // setEthBalance(formated)
+//       console.log('balance: ', y);
+//     } catch (err) {
+//       throw err;
+//     }
+//   },
+//   checkOmen: async () => {
+//     try {
+//       let check = await readAndWriteContract.balanceOf(await signer.getAddress());
+//       // console.log(check.toString())
+//       // setOmenBalance(check.toString())
+//     } catch (err) {
+//       throw err;
+//     }
+//   },
+//   checkCoins: async () => {
+//     let check = await readAndWriteContract.balanceOf(contractAddress);
+//     // setCoins(check.toString())
+//   }
+// };

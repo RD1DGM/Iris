@@ -5,7 +5,7 @@ import ArticlePage from './Pages/ArticlePage';
 import ArticleForm from './Pages/ArticleForm';
 import Loading from './Components/Loading';
 import axios from 'axios';
-import {ContextCreator} from './Context/ContextCreator'
+import { ContextCreator } from './Context/ContextCreator';
 
 function App() {
   const [address, setAddress] = useState();
@@ -30,11 +30,10 @@ function App() {
       <Router>
         <Switch>
           <ContextCreator.Provider value={address}>
-            <Route exact path="/" component={ArticleList} />
+            <Route path="/" component={ArticleList} exact />
             <Route path="/article/:id" component={ArticlePage} />
-            <Route path="/articleform" component={ArticleForm} />
-            <Route component={Loading} />
           </ContextCreator.Provider>
+          <Route path="/articleform" component={ArticleForm} />
         </Switch>
       </Router>
     </div>

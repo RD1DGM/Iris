@@ -6,10 +6,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Loading from '../Components/Loading'
+import Loading from '../Components/Loading';
+import Grid from '@material-ui/core/Grid';
 import { ContextCreator } from '../Context/ContextCreator';
+import { TipEth, TipOmen } from '../Components/AlertDialog';
 
 const ArticlesList = () => {
   const articles = useContext(ContextCreator);
@@ -23,12 +24,12 @@ const ArticlesList = () => {
       minHeight: 175
     }
   });
-  const classes = useStyles();
 
+  const classes = useStyles();
 
   const articlePost = articles ? (
     articles.map((article, key) => (
-      <div key={key} style={{marginBottom: 15}}>
+      <Grid container justify={'center'} style={{margin: 30}} key={key}>
         <Card className={classes.card}>
           <Link to={`/article/${article.articlesId}`}>
             <CardActionArea>
@@ -49,6 +50,9 @@ const ArticlesList = () => {
                 <Typography gutterBottom variant="h6" component="h2">
                   {article.articleTitle} {article.userAddress}
                 </Typography>
+                <Typography gutterBottom variant="caption" component="h2">
+                  by: {article.userAddress}
+                </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   {article.body.substring(0, 135)} . . . .
                 </Typography>
@@ -59,25 +63,20 @@ const ArticlesList = () => {
             </CardActionArea>
           </Link>
           <CardActions>
-            <Button size="small" color="secondary" variant="outlined">
-              Share Omen
-            </Button>
-            <Button size="small" color="secondary" variant="outlined">
-              Tip Ether
-            </Button>
+            <TipEth />
+            <TipOmen />
           </CardActions>
         </Card>
-      </div>
+      </Grid>
     ))
   ) : (
     <Loading />
-      )
-    
+  );
 
   return (
-    <div>
+    <>
       <div>{articlePost}</div>
-    </div>
+    </>
   );
 };
 
