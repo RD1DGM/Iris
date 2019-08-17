@@ -48,7 +48,7 @@ const ArticlesList = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="h2">
-                  {article.articleTitle} {article.userAddress}
+                  {article.articleTitle}
                 </Typography>
                 <Typography gutterBottom variant="caption" component="h2">
                   by: {article.userAddress}
