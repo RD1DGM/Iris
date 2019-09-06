@@ -5,10 +5,10 @@ import Landing_2 from '../Components/Landing_2';
 import Landing_3 from '../Components/Landing_3';
 
 function LandingPage() {
-  const redirect = e => {
-    e.preventDefault();
-    window.location.href = 'http://localhost:3000/articles';
-  };
+  // const redirect = e => {
+  //   e.preventDefault();
+  //   window.location.pathname = '/articles';
+  // };
 
   return (
     <>
@@ -29,8 +29,13 @@ function LandingPage() {
         <div className="landing_4_text">
           <p className="p_4">Wanna start using the DApp?</p>
         </div>
-        <button onClick={e => redirect(e)} className="landing_4_button">
-          Click Here!
+        <button
+          // onClick={e => redirect(e)}
+          className="landing_4_button"
+        >
+          <Link to="/articles">
+            <span style={{ color: 'white' }}> Click Here!</span>
+          </Link>
         </button>
       </div>
       <div className="landing_3">

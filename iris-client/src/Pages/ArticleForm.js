@@ -48,8 +48,7 @@ const ArticleForm = () => {
         setBody('');
         setArticleTitle('');
         setArticleType('');
-        // window.location.href = process.env.REACT_APP_MAIN_URL
-        window.location.href = 'http://localhost:3000';
+        window.location.href = process.env.REACT_APP_MAIN_URL;
         return res;
       }
     } catch (err) {
