@@ -44,8 +44,9 @@ export function useWeb3(opts) {
         try {
           await window.ethereum.enable();
         } catch (e) {
-          if (opts.onEnableError) opts.onEnableError(e);
-          else console.log('Enable error: ' + e);
+          // if (opts.onEnableError) opts.onEnableError(e);
+          // else console.log('Enable error: ' + e);
+          return alert(JSON.stringify(e).substr(26, 40));
         }
 
         determineStatus();

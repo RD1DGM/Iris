@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
+import { readAndWriteContract } from '../utils/ContractFx';
 import { useWeb3 } from '../utils/Web3Helper';
-import { ethers } from 'ethers';
 
 export function TipEth() {
   const w3 = useWeb3();
@@ -15,15 +13,14 @@ export function TipEth() {
   const [open, setOpen] = React.useState(false);
   const [tip, setTip] = useState(0);
   const [ethAddress, setEthAddress] = useState('');
-  const [error, setError] = useState('')
 
   function handleClickOpen() {
     if (status === 'LOCKED') {
       enable();
     }
     if (status === 'READY') {
-      setOpen(true)
-    } 
+      setOpen(true);
+    }
   }
 
   function handleClose() {
@@ -39,11 +36,11 @@ export function TipEth() {
       console.log(tips);
       setTip('');
       setEthAddress('');
-      setOpen(false)
+      setOpen(false);
       return tips;
     } catch (e) {
       if (!ethAddress) {
-        alert(e)
+        alert(e);
       }
     }
   };
@@ -51,12 +48,11 @@ export function TipEth() {
     setTip(e.target.value);
   };
   const ethAddressHandler = e => {
-
     setEthAddress(e.target.value);
   };
 
   return (
-    <div>
+    <div style={{ margin: '0px 5px 0px auto' }}>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Tip ETHER
       </Button>
@@ -69,7 +65,6 @@ export function TipEth() {
         <DialogTitle id="alert-dialog-title">{'WANNA TIP ETHER?'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">YOU WONT REGRET IT!</DialogContentText>
-          {error}
           <input type="button" value="TIP ETH" onClick={() => tipEth()} /> <br />
           Ethereum Address: <input type="text" value={ethAddress} onChange={e => ethAddressHandler(e)} />
           Price in Ether: <input type="text" value={tip} onChange={e => tipHandler(e)} />

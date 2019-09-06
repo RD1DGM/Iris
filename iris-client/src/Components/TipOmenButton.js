@@ -4,7 +4,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
 import { useWeb3 } from '../utils/Web3Helper';
 import { ethers } from 'ethers';
@@ -19,8 +18,8 @@ export function TipOmen() {
       enable();
     }
     if (status === 'READY') {
-      setOpen(true)
-    } 
+      setOpen(true);
+    }
   }
 
   function handleClose() {
@@ -31,16 +30,14 @@ export function TipOmen() {
     const price = ethers.utils.bigNumberify;
     let tip = await readAndWriteContract.tipOmen(contractAddress, price(1), { gasLimit: 3000000 });
     console.log(tip);
-    setOpen(false)
+    setOpen(false);
     return tip;
   };
 
-  // console.log(readAndWriteContract)
-
   return (
-    <div>
+    <div style={{ margin: '0px auto 0px 0px' }}>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Tip OMEN Coins
+        Tip OMEN
       </Button>
       <Dialog
         open={open}
@@ -48,8 +45,9 @@ export function TipOmen() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogContent>
+        <DialogContent style={{ marginTop: 30 }}>
           <DialogContentText id="alert-dialog-description">
+            **You can only send tokens to users that already have some**
           </DialogContentText>
         </DialogContent>
         <DialogActions>
