@@ -1,33 +1,19 @@
-import React, { useContext } from 'react';
-import { ContextCreator } from '../Context/ContextCreator';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
-import axios from 'axios';
+import Delete from '../http_requests/DeleteRequest';
+import useFetch from '../http_requests/GetRequest';
 
 const ArticlePage = ({ match }) => {
+  const state = useFetch();
   const id = match.params.id;
 
-  const [articles] = useContext(ContextCreator);
-
-  const singleArticle = articles ? articles.find(article => article.articlesId === id) : <p> Loading. . .</p>;
-
-  const DELETE = async e => {
-    try {
-      e.preventDefault();
-      let delRes = axios.delete(`https://us-central1-iris-f137c.cloudfunctions.net/api/article/${id}`, {
-        data: { userAddress: `${window.web3.eth.accounts[0]}` }
-      });
-      console.log(delRes);
-      await axios.get(process.env.REACT_APP_POST_URL);
-      // window.location.href = process.env.REACT_APP_MAIN_URL
-      window.location.href = 'http://localhost:3000/articles';
-      return delRes;
-    } catch (err) {
-      console.log(err);
-      alert(err);
-    }
-  };
+  const singleArticle = state.articles ? (
+    state.articles.find(article => article.articlesId === id)
+  ) : (
+    <p> Loading. . .</p>
+  );
 
   return (
     <Grid container justify={'center'}>
@@ -36,7 +22,7 @@ const ArticlePage = ({ match }) => {
         style={{ background: 'rgb(222, 222, 222)', padding: 25, margin: 40, wordWrap: 'break-word' }}
       >
         {window.web3.eth.accounts[0] === singleArticle.userAddress ? (
-          <Button color="secondary" variant="contained" onClick={e => DELETE(e)}>
+          <Button color="secondary" variant="contained" onClick={e => Delete(e, id)}>
             Delete Post
           </Button>
         ) : null}

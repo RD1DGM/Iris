@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Button } from '@material-ui/core';
 import { useWeb3 } from '../utils/Web3Helper';
 import { Link } from 'react-router-dom';
 import '../styles/global.css';

@@ -1,74 +1,41 @@
-import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import { ContextCreator } from '../Context/ContextCreator';
+import React, { useContext, useEffect } from 'react';
+import { ContextCreator } from '../context/ContextCreator';
+import usePost from '../http_requests/PostRequest';
 import config from '../utils/config';
-import firebase from 'firebase/';
+import firebase from 'firebase';
 import '../styles/global.css';
 
 firebase.initializeApp(config);
 
 const ArticleForm = () => {
-  const [body, setBody] = useState('');
-  const [userAddress, setUserAddress] = useState('');
-  const [articleTitle, setArticleTitle] = useState('');
-  const [articleType, setArticleType] = useState('');
-  const [articleImageUpload, setArticleImageUpload] = useState(null);
-  const [images, setImages] = useState('');
-  const [imageName, setImageName] = useState('');
-  const [verified, setVerified] = useState(false);
-
-  const [, setArticles] = useContext(ContextCreator);
+  const Post = usePost();
+  const { state, dispatch } = useContext(ContextCreator);
 
   useEffect(() => {
-    setUserAddress(window.web3.eth.accounts[0]);
+    dispatch({
+      type: 'SET_USER_ADDRESS',
+      userAddress: window.web3.eth.accounts[0]
+    });
   }, []);
 
-  const POST = async e => {
-    try {
-      e.preventDefault();
-      if (body === '') {
-        alert('Can not leave the text field blank.');
-        return;
-      } else if (verified === false) {
-        alert('Must verify the file first.');
-        return;
-      } else {
-        let res = await axios.post(process.env.REACT_APP_GET_URL, {
-          body,
-          userAddress,
-          articleTitle,
-          articleType,
-          articleImageUpload
-        });
-        let getRes = await axios.get(process.env.REACT_APP_POST_URL);
-        let data = getRes.data;
-        console.log(data);
-        console.log('article:', articleImageUpload);
-        setArticles(data);
-        setBody('');
-        setArticleTitle('');
-        setArticleType('');
-        window.location.href = process.env.REACT_APP_MAIN_URL;
-        return res;
-      }
-    } catch (err) {
-      console.error(err);
-      alert(err);
-    }
-  };
-
   const handleImageChange = e => {
-    const image = e.target.files[0];
-    console.log(image);
-    setImages(image);
-    setImageName(image.name);
+    const file = e.target.files[0];
+    console.log(file);
+    dispatch({
+      type: 'SET_IMAGES',
+      images: file
+    });
+    dispatch({
+      type: 'SET_IMAGE_NAME',
+      imageName: file.name
+    });
   };
 
   const handleUploadImage = async () => {
     let upload = await firebase
       .storage()
-      .ref(images.name)
-      .put(images);
+      .ref(state.images.name)
+      .put(state.images);
     console.log('upload: ', upload);
     return upload;
   };
@@ -77,13 +44,21 @@ const ArticleForm = () => {
     try {
       e.preventDefault();
       await handleUploadImage();
-      let url = await firebase
+      await firebase
         .storage()
-        .ref(images.name)
+        .ref(state.images.name)
         .getDownloadURL()
-        .then(earl => setArticleImageUpload(earl) + console.log(earl));
-      setVerified(true);
-      return url;
+        .then(
+          url =>
+            dispatch({
+              type: 'SET_ARTICLE_IMAGE_UPLOAD',
+              articleImageUpload: url
+            }) + console.log(url)
+        );
+      dispatch({
+        type: 'SET_VERIFIED',
+        verified: true
+      });
     } catch (err) {
       console.log(err);
     }
@@ -95,15 +70,20 @@ const ArticleForm = () => {
         <textarea
           placeholder="Type here..."
           name="body"
-          value={body}
-          onChange={e => setBody(e.currentTarget.value)}
+          value={state.body}
+          onChange={e =>
+            dispatch({
+              type: 'SET_BODY',
+              body: e.currentTarget.value
+            })
+          }
           cols="80"
           rows="20"
         />
         <div>
           <input type="file" name="upload" id="file" onChange={e => handleImageChange(e)} />
           <label htmlFor="file">Upload Image</label>
-          {imageName}
+          {state.imageName}
           <button onClick={e => getImageUrl(e)}>Verify File</button>
         </div>
         <div>
@@ -111,8 +91,13 @@ const ArticleForm = () => {
             placeholder="Input Title..."
             type="text"
             name="articleTitle"
-            value={articleTitle}
-            onChange={e => setArticleTitle(e.currentTarget.value)}
+            value={state.articleTitle}
+            onChange={e =>
+              dispatch({
+                type: 'SET_ARTICLE_TITLE',
+                articleTitle: e.currentTarget.value
+              })
+            }
           />
         </div>
         <div>
@@ -120,11 +105,16 @@ const ArticleForm = () => {
             placeholder="Input Category..."
             type="text"
             name="articleType"
-            value={articleType}
-            onChange={e => setArticleType(e.currentTarget.value)}
+            value={state.articleType}
+            onChange={e =>
+              dispatch({
+                type: 'SET_ARTICLE_TYPE',
+                articleType: e.currentTarget.value
+              })
+            }
           />
         </div>
-        <button type="submit" onClick={e => POST(e)}>
+        <button type="submit" onClick={e => Post(e)}>
           Submit
         </button>
       </form>

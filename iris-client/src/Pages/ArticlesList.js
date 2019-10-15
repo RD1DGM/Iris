@@ -1,42 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-// import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Loading from '../Components/Loading';
-import { ContextCreator } from '../Context/ContextCreator';
-import { TipEth } from '../Components/TipEthButton';
-import { TipOmen } from '../Components/TipOmenButton';
-import Navbar from '../Components/Navbar';
-import StartPost from '../Components/StartPost';
+import Loading from '../components/Loading';
+import { TipEth } from '../components/TipEthButton';
+import { TipOmen } from '../components/TipOmenButton';
+import StartPost from '../components/StartPost';
+import useFetch from '../http_requests/GetRequest';
 
 const ArticlesList = () => {
-  const [articles] = useContext(ContextCreator);
+  const state = useFetch();
 
-  // const useStyles = makeStyles({
-  //   card: {
-  //     maxWidth: 500,
-  //     backgroundColor: 'rgba(236,239,241,1)'
-  //   },
-  //   media: {
-  //     minHeight: 175
-  //   }
-  // });
-
-  // const classes = useStyles();
-
-  const articlePost = articles ? (
-    articles.map((article, key) => (
-      // <Grid container justify={'center'} style={{ margin: 30 }} key={key}>
+  const articlePost = state.articles ? (
+    state.articles.map((article, key) => (
       <div key={key}>
         <Card className="card">
           <Link to={`/article/${article.articlesId}`}>
             <CardActionArea>
-              {/* <div> {article.articleType} </div> */}
               <div
                 style={{
                   backgroundImage: `url(${article.articleImageUpload})`,
@@ -78,7 +61,6 @@ const ArticlesList = () => {
 
   return (
     <>
-      <Navbar />
       <div className="article_list_page">
         <div className="article_header"></div>
         <div className="article_posts">{articlePost}</div>
@@ -91,30 +73,32 @@ const ArticlesList = () => {
           </div>
         </div>
         <div className="article_trending">
-          <div className="article_trending_text">Trending:</div>
-          <div>
-            <button className="article_trending_button">Bitcoin</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Ethereum</button>
-          </div>
-          <div>
-            <button className="article_trending_button">EOS</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Litecoin</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Photography</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Technology</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Vitalik Buterin</button>
-          </div>
-          <div>
-            <button className="article_trending_button">Consensys</button>
+          <div className="test">
+            <div className="article_trending_text">Trending:</div>
+            <div>
+              <button className="article_trending_button">Bitcoin</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Ethereum</button>
+            </div>
+            <div>
+              <button className="article_trending_button">EOS</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Litecoin</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Photography</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Technology</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Vitalik Buterin</button>
+            </div>
+            <div>
+              <button className="article_trending_button">Consensys</button>
+            </div>
           </div>
         </div>
       </div>

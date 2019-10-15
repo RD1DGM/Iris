@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import abi from '../Contract_ABI/abi';
+import abi from '../contract_abi/abi';
 require('dotenv').config();
 
 export const provider = new ethers.providers.Web3Provider(window.web3.currentProvider);

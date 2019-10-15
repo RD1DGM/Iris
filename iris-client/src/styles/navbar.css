@@ -1,0 +1,110 @@
+@import url('https://use.typekit.net/sna0eew.css');
+
+.navbar {
+  display: grid;
+  grid-template-columns: 0.4fr repeat(2, 1fr) 0.4fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    '1 nav_logo nav_links 4'
+    '1 nav_logo nav_links 4';
+  column-gap: 2.5em;
+  background-color: transparent;
+  /* background-color: #ffffff9e; */
+  position: fixed;
+  width: 100%;
+  height: 7vh;
+  z-index: 2;
+}
+
+.navbar_scrolled {
+  background-color: #483bd2;
+}
+
+.navbar_hidden {
+  visibility: hidden;
+}
+
+.navbar_logo {
+  width: 50px;
+  height: 50px;
+  grid-area: nav_logo;
+  margin: 0 2em;
+  align-self: center;
+  background: url(../assets/Logo_Original_White.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.navbar_logo_scrolled {
+  width: 50px;
+  height: 50px;
+  grid-area: nav_logo;
+  margin: 0 2em;
+  align-self: center;
+  background: url(../assets/Logo_Original_Scrolled.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.navbar_logo_scrolled::after {
+  content: 'IRIS';
+  position: relative;
+  /* background: linear-gradient(#63c5d8 30%, #6156af 70%); */
+  /* background: linear-gradient(#6156af 30%, #63c5d8 70%); */
+  background-color: #a43bd2;
+  /* background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.6rem;
+  font-family: kanit, sans-serif;
+  letter-spacing: -1px;
+  bottom: 0.25em;
+  left: 1.2em; */
+}
+
+.navbar_logo::after {
+  content: 'IRIS';
+  position: relative;
+  /* background: linear-gradient(#63c5d8 30%, #6156af 70%); */
+  /* background: linear-gradient(#6156af 30%, #63c5d8 70%); */
+  background-color: white;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.6rem;
+  font-family: kanit, sans-serif;
+  letter-spacing: -1px;
+  bottom: 0.25em;
+  left: 1.2em;
+}
+
+.navbar_links {
+  grid-area: nav_links;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar_links > * {
+  color: #ffffff;
+  /* color: #ba68c8; */
+  align-self: center;
+  justify-self: right;
+  margin: 0 0.9em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.navbar_links_scrolled > * {
+  color: #a43bd2;
+}
+
+.navbar_links > *::after {
+  content: '';
+  margin: 0 auto;
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.3s;
+}
+
+.navbar_links > *:hover::after {
+  width: 100%;
+  transition: width 0.3s;
+}

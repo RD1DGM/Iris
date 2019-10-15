@@ -7,11 +7,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
 import { useWeb3 } from '../utils/Web3Helper';
 import { ethers } from 'ethers';
+import { ContextCreator } from '../context/ContextCreator';
 
 export function TipOmen() {
   const w3 = useWeb3();
   const { status, enable } = w3;
   const [open, setOpen] = React.useState(false);
+  const { state, dispatch } = React.useContext(ContextCreator);
 
   function handleClickOpen() {
     if (status === 'LOCKED') {

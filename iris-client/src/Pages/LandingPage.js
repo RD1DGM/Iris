@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Landing_1 from '../Components/Landing_1';
-import Landing_2 from '../Components/Landing_2';
-import Landing_3 from '../Components/Landing_3';
+import Landing_1 from '../components/Section_1';
+import Landing_2 from '../components/Section_2';
+import Landing_3 from '../components/Section_3';
+import '../styles/landing_1.css';
+import Navbar from '../components/Navbar';
 
 function LandingPage() {
-  // const redirect = e => {
-  //   e.preventDefault();
-  //   window.location.pathname = '/articles';
-  // };
-
   return (
     <>
-      <div className="landing_1">
+      <Navbar />
+      <div id="landing_1" className="landing_1">
         <div className="landing_1_text">
           <Landing_1 />
         </div>
         <div className="landing_1_img"></div>
       </div>
-      <div className="landing_2">
+      <div id="landing_2" className="landing_2">
         <div className="landing_2_text">
           <Landing_2 />
         </div>
@@ -27,18 +25,17 @@ function LandingPage() {
       </div>
       <div className="landing_4">
         <div className="landing_4_text">
-          <p className="p_4">Wanna start using the DApp?</p>
+          <p className="p_4" style={{ fontSize: '2.5em', fontWeight: 'bold' }}>
+            Wanna start using the DApp?
+          </p>
         </div>
-        <button
-          // onClick={e => redirect(e)}
-          className="landing_4_button"
-        >
+        <button className="landing_4_button">
           <Link to="/articles">
-            <span style={{ color: 'white' }}> Click Here!</span>
+            <span style={{ color: 'white', fontSize: '4rem' }}> Click Here!</span>
           </Link>
         </button>
       </div>
-      <div className="landing_3">
+      <div id="landing_3" className="landing_3">
         <Landing_3 />
       </div>
     </>
