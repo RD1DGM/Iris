@@ -10,13 +10,12 @@ firebase.initializeApp(config);
 
 app.use(cors());
 
-const { getAllArticles, postArticle, getArticles, deleteArticle } = require('./handlers/articles');
+const { getAllArticles, postArticle, deleteArticle } = require('./handlers/articles');
 
 // article routes
 app.get('/articles', getAllArticles);
 app.post('/article', postArticle);
 
-app.get('/article/:articlesId', getArticles);
 app.delete('/article/:articlesId', deleteArticle);
 
 exports.api = functions.https.onRequest(app);

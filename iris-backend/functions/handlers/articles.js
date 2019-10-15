@@ -1,12 +1,13 @@
 const { admin, db } = require('../utils/admin');
 const config = require('../utils/config');
+const moment = require('moment');
 
 exports.getAllArticles = (req, res) => {
   db.collection('articles')
     .orderBy('createdAt', 'desc')
     .get()
     .then(data => {
-      console.log(data);
+      console.log('db_data:', data);
       let articles = [];
       data.forEach(doc => {
         console.log(doc.data());
@@ -14,6 +15,7 @@ exports.getAllArticles = (req, res) => {
           articlesId: doc.id,
           articleTitle: doc.data().articleTitle,
           articleType: doc.data().articleType,
+          articleImageUpload: doc.data().articleImageUpload,
           body: doc.data().body,
           userAddress: doc.data().userAddress,
           createdAt: doc.data().createdAt,
@@ -27,38 +29,21 @@ exports.getAllArticles = (req, res) => {
       return res.status(500).json({ error: err.code });
     });
 };
-
-exports.getArticles = (req, res) => {
-  db.collection('articles')
-    .doc(`/articles/${req.params.articlesId}`)
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        return res.json(doc.data());
-      } else {
-        return res.status(404).json({ error: 'nothing was found' });
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      return res.status(500).json({ error: err.code });
-    });
-};
-
-const noPic = 'no-img.png';
-const firstPic = 'FirstCard.png'
+// const noPic = 'no-img.png';
+// const firstPic = 'FirstCard.png'
 
 exports.postArticle = (req, res) => {
   if (req.body.body.trim() === '') {
     return res.status(400).json({ body: 'Body must not be empty' });
   }
   const newArticle = {
-    imageSrc: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${firstPic}?alt=media`,
+    // imageSrc: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${firstPic}?alt=media`,
     articleTitle: req.body.articleTitle,
     articleType: req.body.articleType,
+    articleImageUpload: req.body.articleImageUpload,
     body: req.body.body,
     userAddress: req.body.userAddress,
-    createdAt: new Date().toISOString()
+    createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
   };
 
   db.collection('articles')
