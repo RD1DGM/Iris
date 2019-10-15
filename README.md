@@ -35,10 +35,3 @@ $ cd iris-client
 $ npm install
 $ npm start
 ```
-
-Run the server
-```
-$ cd iris-backend
-$ npm install
-$ npm start
-```
