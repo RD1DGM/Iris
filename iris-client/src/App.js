@@ -1,27 +1,37 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-import ArticleList from './pages/ArticlesList';
-import ArticlePage from './pages/ArticlePage';
-import ArticleForm from './pages/ArticleForm';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
+import ArticleList from "./pages/ArticlesList";
+import ArticlePage from "./pages/ArticlePage";
+import ArticleForm from "./pages/ArticleForm";
 
-import NotFound from './pages/NotFound';
-import LandingPage from './pages/LandingPage';
-import ScrollToTop from './components/ScrollToTop';
+import NotFound from "./pages/NotFound";
+import LandingPage from "./pages/LandingPage";
+import ScrollToTop from "./components/ScrollToTop";
+import MetaMask from "./pages/MetaMask";
 
 function App() {
   return (
     <>
-      <Router>
-        <ScrollToTop>
-          <Switch>
-            <Route path="/" component={LandingPage} exact />
-            <Route path="/articles" component={ArticleList} />
-            <Route path="/article/:id" component={ArticlePage} />
-            <Route path="/articleform" component={ArticleForm} />
-            <Route component={NotFound} />
-          </Switch>
-        </ScrollToTop>
-      </Router>
+      {window.ethereum === undefined ? (
+        <MetaMask />
+      ) : (
+        <Router>
+          <ScrollToTop>
+            <Switch>
+              <Route path="/" component={LandingPage} exact />
+              <Route path="/articles" component={ArticleList} />
+              <Route path="/article/:id" component={ArticlePage} />
+              <Route path="/articleform" component={ArticleForm} />
+              <Route component={NotFound} />
+            </Switch>
+          </ScrollToTop>
+        </Router>
+      )}
     </>
   );
 }

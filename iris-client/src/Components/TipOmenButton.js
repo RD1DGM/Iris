@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
+// import { readAndWriteContract, contractAddress } from '../utils/ContractFx';
 import { useWeb3 } from '../utils/Web3Helper';
 import { ethers } from 'ethers';
 import { ContextCreator } from '../context/ContextCreator';
@@ -30,7 +30,7 @@ export function TipOmen() {
 
   const tip = async () => {
     const price = ethers.utils.bigNumberify;
-    let tip = await readAndWriteContract.tipOmen(contractAddress, price(1), { gasLimit: 3000000 });
+    // let tip = await readAndWriteContract.tipOmen(contractAddress, price(1), { gasLimit: 3000000 });
     console.log(tip);
     setOpen(false);
     return tip;

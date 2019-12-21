@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { readAndWriteContract } from '../utils/ContractFx';
+// import { readAndWriteContract } from '../utils/ContractFx';
 import { useWeb3 } from '../utils/Web3Helper';
 import { ContextCreator } from '../context/ContextCreator';
 
@@ -32,32 +32,32 @@ export function TipEth() {
     });
   }
 
-  const tipEth = async () => {
-    try {
-      let tips = await readAndWriteContract.tipWei(state.ethAddress, {
-        gasLimit: 3000000,
-        value: '0x' + window.web3.toWei(`${state.tip}`)
-      });
-      console.log(tips);
-      dispatch({
-        type: 'SET_OPEN',
-        open: false
-      });
-      dispatch({
-        type: 'SET_TIP',
-        tip: 0
-      });
-      dispatch({
-        type: 'SET_ETHADDRESS',
-        ethAddress: ''
-      });
-      return tips;
-    } catch (e) {
-      if (!state.ethAddress) {
-        alert(e);
-      }
-    }
-  };
+  // const tipEth = async () => {
+  //   try {
+  //     let tips = await readAndWriteContract.tipWei(state.ethAddress, {
+  //       gasLimit: 3000000,
+  //       value: '0x' + window.web3.toWei(`${state.tip}`)
+  //     });
+  //     console.log(tips);
+  //     dispatch({
+  //       type: 'SET_OPEN',
+  //       open: false
+  //     });
+  //     dispatch({
+  //       type: 'SET_TIP',
+  //       tip: 0
+  //     });
+  //     dispatch({
+  //       type: 'SET_ETHADDRESS',
+  //       ethAddress: ''
+  //     });
+  //     return tips;
+  //   } catch (e) {
+  //     if (!state.ethAddress) {
+  //       alert(e);
+  //     }
+  //   }
+  // };
 
   return (
     <div style={{ margin: '0px 5px 0px auto' }}>
@@ -73,7 +73,9 @@ export function TipEth() {
         <DialogTitle id="alert-dialog-title">{'WANNA TIP ETHER?'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">YOU WONT REGRET IT!</DialogContentText>
-          <input type="button" value="TIP ETH" onClick={() => tipEth()} /> <br />
+          <input type="button" value="TIP ETH"
+            // onClick={() => tipEth()}
+          /> <br />
           Ethereum Address:{' '}
           <input
             type="text"
