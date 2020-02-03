@@ -17,7 +17,9 @@
 }
 
 .navbar_scrolled {
-  background-color: #483bd2;
+  background-color: hsl(282, 63%, 38%);
+  /* background-color: hsl(213, 70%, 32%); */
+  opacity: .8;
 }
 
 .navbar_hidden {
@@ -40,7 +42,7 @@
   grid-area: nav_logo;
   margin: 0 2em;
   align-self: center;
-  background: url(../assets/Logo_Original_Scrolled.png) no-repeat;
+  background: url(../assets/Logo_Original_White.png) no-repeat;
   background-size: 100% 100%;
 }
 
@@ -91,7 +93,7 @@
   cursor: pointer;
 }
 .navbar_links_scrolled > * {
-  color: #a43bd2;
+  color: #fff;
 }
 
 .navbar_links > *::after {
